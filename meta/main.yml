@@ -1,0 +1,27 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: 'ansible_role_vscode'
+  author: origox
+  description: Install and configure git
+  issue_tracker_url: https://github.com/origox/ansible_role_vscode/issues
+  company: NA
+  license: "license (BSD, MIT)"
+  min_ansible_version: "2.4"
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - desktop
+    - browser
+    - chrome
+    - google
+    

@@ -1,0 +1,7 @@
+---
+- name: "Ensure that Chrome is installed"
+  ansible.builtin.apt: 
+    name: "google-chrome-stable" 
+    update_cache: yes 
+    state: present
+  become: true
