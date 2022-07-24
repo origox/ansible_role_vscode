@@ -4,6 +4,18 @@
   gather_facts: true
     
   tasks:
+    - name: "Pre requisites"
+      ansible.builtin.apt:
+        name: "gpg-agent"
+        state: present
+        update_cache: true
+    
+    - name: Create an user
+      ansible.builtin.user:
+        name: devops
+        password: devops
+
     - name: "Include origox.ansible_role_vscode"
       ansible.builtin.include_role:
         name: "origox.ansible_role_vscode"
+

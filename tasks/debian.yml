@@ -1,7 +1,27 @@
 ---
-- name: "Ensure that Chrome is installed"
-  ansible.builtin.apt: 
-    name: "google-chrome-stable" 
-    update_cache: yes 
-    state: present
-  become: true
+  - name: Add Microsoft APT package key
+    become: true
+    ansible.builtin.apt_key:
+      url: https://packages.microsoft.com/keys/microsoft.asc
+    
+  - name: Add VS Code APT package repository
+    become: true
+    ansible.builtin.apt_repository:
+      repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+      filename: vscode
+      update_cache: no
+    register: apt_repository
+    
+  - name: Install VS Code (Linux)
+    become: true
+    ansible.builtin.apt:
+      package: code
+      update_cache: yes
+
+  - name: Ensure VS Code extensions
+    become: false
+    ansible.builtin.command:
+      cmd: code --install-extension "{{ item }}"
+      creates: "~/.vscode/extensions/{{ item }}-*/package.json"
+    with_items: "{{ vscode_extensions }}"
+  
